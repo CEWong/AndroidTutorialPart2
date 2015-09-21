@@ -2,9 +2,11 @@ package com.cewong.mysecondapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +15,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     TextView mainTextView;
     Button mainButton;
@@ -21,6 +23,7 @@ class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ListView mainListView;
     ArrayAdapter mArrayAdapter;
     ArrayList mNameList = new ArrayList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,13 @@ class MainActivity extends AppCompatActivity implements View.OnClickListener {
         mArrayAdapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1,
                 mNameList);
-
         // Set the ListView to use the ArrayAdapter
         mainListView.setAdapter(mArrayAdapter);
+
+        // 5. Set this activity to react to list items being pressed
+        mainListView.setOnItemClickListener(this);
+
+
     }
 
     @Override
@@ -71,5 +78,13 @@ class MainActivity extends AppCompatActivity implements View.OnClickListener {
         mNameList.add(mainEditText.getText().toString());
         mArrayAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // Log the item's position and contents
+        // to the console in Debug
+        Log.d("omg android", position + ": " + mNameList.get(position));
+    }
+
 }
 
