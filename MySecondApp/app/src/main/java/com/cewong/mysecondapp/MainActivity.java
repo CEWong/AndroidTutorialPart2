@@ -6,12 +6,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView mainTextView;
     Button mainButton;
+    EditText mainEditText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,9 @@ class MainActivity extends AppCompatActivity implements View.OnClickListener {
         // and listen for it here
         mainButton = (Button) findViewById(R.id.main_button);
         mainButton.setOnClickListener(this);
+
+        // 3. Access the EditText defined in layout XML
+        mainEditText = (EditText) findViewById(R.id.main_edittext);
     }
 
     @Override
@@ -39,8 +45,10 @@ class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // Test the Button
-        mainTextView.setText("Button pressed!");
+        // Take what was typed into the EditText
+        // and use in TextView
+        mainTextView.setText(mainEditText.getText().toString()
+                + " is learning Android development!");
     }
 }
 
