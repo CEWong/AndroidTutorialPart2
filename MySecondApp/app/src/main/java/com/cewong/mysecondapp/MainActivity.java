@@ -1,6 +1,7 @@
 package com.cewong.mysecondapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     ArrayAdapter mArrayAdapter;
     ArrayList mNameList = new ArrayList();
     ShareActionProvider mShareActionProvider;
+    private static final String PREFS = "prefs";
+    private static final String PREF_NAME = "name";
+    SharedPreferences mSharedPreferences;
 
 
     @Override
@@ -59,7 +63,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // 5. Set this activity to react to list items being pressed
         mainListView.setOnItemClickListener(this);
-
 
     }
 
@@ -115,6 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // 6. The text you'd like to share has changed,
         // and you need to update
         setShareIntent();
+
+        // 7. Greet the user, or ask for their name if new
+        displayWelcome();
     }
 
     @Override
@@ -124,5 +130,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("omg android", position + ": " + mNameList.get(position));
     }
 
+    // 7. Greet the user, or ask for their name if new
+    displayWelcome();
 }
 
